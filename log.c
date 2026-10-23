@@ -74,7 +74,30 @@ void get(int key){
 	return;	
 	}
 	printf("not found\n");
+	
 }
+void delete(int key){
+	struct node *beforekey=NULL;
+       	/*here , lets say we found the key on node 2, no we need to erase that node completely
+	 , so we make node 1 point to node 3 instead of node 2 , we keep a track of node 1 w another diff pointer*/
+	int slot=hash(key);
+	struct node *q=table[slot];
+
+	while(q!=NULL){
+		if(q->key==key){
+			if(prev==NULL){
+				table[slot]=q->next;
+			}// for when node is the first node itself
+			else{
+				prev->next=q->next; // this step
+				}
+			free(q);
+			return;
+		}
+			prev=q;
+		q=q->next;
+			}
+}	
 
 
 
